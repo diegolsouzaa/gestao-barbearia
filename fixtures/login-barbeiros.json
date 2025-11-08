@@ -1,0 +1,10 @@
+{
+  "loginValido": {
+    "email": "diego@email.com",
+    "senha": "12345678"
+  },
+  "loginInvalido": {
+    "email": "diego@email.com",
+    "senha": "senhaerrada"
+  }
+}

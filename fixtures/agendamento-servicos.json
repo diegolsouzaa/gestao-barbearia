@@ -1,0 +1,30 @@
+{
+  "agendamentoValido": {
+    "nomeCliente": "Cliente 1",
+    "cpfCliente": "11122233344",
+    "servico": "Corte de cabelo",
+    "data": "2025-11-09",
+    "horario": "10:00"
+  },
+  "agendamentoCamposIncompletos": {
+    "nomeCliente": "",
+    "cpfCliente": "",
+    "servico": "",
+    "data": "",
+    "horario": ""
+  },
+  "agendamentoConflitoBarbeiro": {
+    "nomeCliente": "Cliente 2",
+    "cpfCliente": "55566677788",
+    "servico": "Barba",
+    "data": "2025-11-09",
+    "horario": "10:00"
+  },
+  "agendamentoConflitoCliente": {
+    "nomeCliente": "Cliente 1",
+    "cpfCliente": "11122233344",
+    "servico": "Barba",
+    "data": "2025-11-09",
+    "horario": "10:00"
+  }
+}

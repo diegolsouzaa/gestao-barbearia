@@ -1,11 +1,12 @@
+
 require('dotenv').config();
 const request = require('supertest');
 const { expect } = require('chai');
-const baseURL = process.env.BASE_URL;
+const baseURL = process.env.BASE_URL || 'http://localhost:3000';
 const registroData = require('../../fixtures/registro-barbeiros.json');
 
-describe('Registro de Barbeiros', function () {
-  it('Deve registrar barbeiro informando todos os campos obrigatórios', async function () {
+describe('JIRA-0001: Registro de Barbeiros', function () {
+  it('Tentar registrar um barbeiro informando todos os campos obrigatórios', async function () {
     const res = await request(baseURL)
       .post('/api/barbeiros/register')
       .send(registroData.barbeiroValido);
@@ -14,7 +15,7 @@ describe('Registro de Barbeiros', function () {
     expect(res.body.email).to.equal(registroData.barbeiroValido.email);
   });
 
-  it('Não deve registrar barbeiro sem preencher todos os campos obrigatórios', async function () {
+  it('Tentar registrar um barbeiro sem preencher todos os campos obrigatórios', async function () {
     const res = await request(baseURL)
       .post('/api/barbeiros/register')
       .send(registroData.barbeiroCamposIncompletos);
@@ -22,7 +23,7 @@ describe('Registro de Barbeiros', function () {
     expect(res.body).to.have.property('error');
   });
 
-  it('Não deve registrar barbeiro com e-mail já existente', async function () {
+  it('Tentar registrar um barbeiro com e-mail já existente', async function () {
     await request(baseURL)
       .post('/api/barbeiros/register')
       .send(registroData.barbeiroValido);
@@ -33,7 +34,7 @@ describe('Registro de Barbeiros', function () {
     expect(res.body).to.have.property('error');
   });
 
-  it('Não deve registrar barbeiro com CPF já existente', async function () {
+  it('Tentar registrar um barbeiro com CPF já existente', async function () {
     const res = await request(baseURL)
       .post('/api/barbeiros/register')
       .send(registroData.barbeiroCpfDuplicado);
@@ -41,7 +42,7 @@ describe('Registro de Barbeiros', function () {
     expect(res.body).to.have.property('error');
   });
 
-  it('Não deve registrar barbeiro com senha menor que 8 caracteres', async function () {
+  it('Tentar registrar uma senha com menos de 8 caracteres', async function () {
     const res = await request(baseURL)
       .post('/api/barbeiros/register')
       .send(registroData.barbeiroSenhaInvalida);
@@ -49,3 +50,4 @@ describe('Registro de Barbeiros', function () {
     expect(res.body).to.have.property('error');
   });
 });
+

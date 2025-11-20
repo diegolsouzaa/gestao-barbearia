@@ -33,40 +33,5 @@
     "email": "senha@email.com",
     "senha": "123",
     "telefone": "11999999999"
-  },
-  "barbeiroValido": {
-    "nome": "Diego Souza",
-    "cpf": "12345678901",
-    "email": "diego@email.com",
-    "senha": "12345678",
-    "telefone": "11999999999"
-  },
-  "barbeiroCamposIncompletos": {
-    "nome": "",
-    "cpf": "",
-    "email": "",
-    "senha": "12345678",
-    "telefone": ""
-  },
-  "barbeiroEmailDuplicado": {
-    "nome": "Outro Barbeiro",
-    "cpf": "98765432100",
-    "email": "diego@email.com",
-    "senha": "87654321",
-    "telefone": "11888888888"
-  },
-  "barbeiroCpfDuplicado": {
-    "nome": "Outro Barbeiro",
-    "cpf": "12345678901",
-    "email": "outro@email.com",
-    "senha": "87654321",
-    "telefone": "11888888888"
-  },
-  "barbeiroSenhaInvalida": {
-    "nome": "Barbeiro Senha",
-    "cpf": "11122233344",
-    "email": "senha@email.com",
-    "senha": "123",
-    "telefone": "11999999999"
   }
 }

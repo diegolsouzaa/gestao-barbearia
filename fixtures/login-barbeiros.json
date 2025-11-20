@@ -6,5 +6,9 @@
   "loginInvalido": {
     "email": "diego@email.com",
     "senha": "senhaerrada"
+  },
+  "loginBloqueio": {
+    "email": "diego@email.com",
+    "senha": "senhaerrada"
   }
 }

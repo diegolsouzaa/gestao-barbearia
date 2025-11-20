@@ -16,7 +16,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "chai": "^5.3.3",
+    "chai": "4.3.7",
     "dotenv": "^16.6.1",
     "mocha": "^11.7.5",
     "mochawesome": "^7.1.4",

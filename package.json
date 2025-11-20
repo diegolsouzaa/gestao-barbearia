@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "npx mocha \"test/**/*.test.js\"",
-    "test:report":  "mocha \"test/**/*.test.js\" --reporter mochawesome --reporter-options reportFilename=report"
+    "test:report": "mocha \"test/**/*.test.js\" --reporter mochawesome --reporter-options reportFilename=report"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -16,7 +16,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "chai": "^6.2.0",
+    "chai": "^5.3.3",
     "dotenv": "^17.2.3",
     "mocha": "^11.7.5",
     "mochawesome": "^7.1.4",

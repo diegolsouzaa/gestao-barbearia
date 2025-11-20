@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "npx mocha \"test/**/*.test.js\"",
-    "test:report": "mocha --recursive test --reporter mochawesome"
+    "test:report":  "mocha \"test/**/*.test.js\" --reporter mochawesome --reporter-options reportFilename=report"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

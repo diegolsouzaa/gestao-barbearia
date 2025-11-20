@@ -1,0 +1,102 @@
+JIRA-0001: Registro de Barbeiros
+ID
+Condição
+Resultado Esperado
+Camada
+1
+Tentar registrar um barbeiro informando todos os campos obrigatórios
+Barbeiro registrado com sucesso
+API
+2
+Tentar registrar um barbeiro sem preencher todos os campos obrigatórios
+Barbeiro registrado com sucesso
+API
+3
+Tentar registrar um barbeiro com e-mail já existente
+Falha por duplicidade de e-mail
+API
+4
+Tentar registrar um barbeiro com CPF já existente
+Falha por duplicidade de CPF
+API
+5
+Tentar registrar uma senha com menos de 8 caracteres
+Falha por senha não atender aos requisitos mínimos
+API
+
+JIRA-0002:Login de Barbeiros
+ID
+Condição
+Resultado Esperado
+Camada
+1
+Tentar realizar login com credenciais válidas
+Acesso concedido
+API
+2
+Tentar realizar login com e-mail ou senha incorretos
+Falha de autenticação
+API
+3
+Tentar realizar login após 5 tentativas inválidas consecutivas
+Conta bloqueada por tempo determinado
+API
+4
+Tentar realizar login durante o período de bloqueio
+Falha por conta temporariamente bloqueada
+API
+
+JIRA-0003: Agendamento de Serviços para Clientes
+ID
+Condição
+Resultado Esperado
+Camada
+1
+tentar cadastrar um agendamento com um barbeiro com horario disponivel, informando todos os campos obrigatórios
+Serviço agendado
+API
+2
+tentar cadastrar um agendamento sem todos os campos obrigatórios
+Falha por falta de preenchimento de campos obrigatorios
+API
+3
+tentar cadastrar um agendamento em um horário já ocupado pelo barbeiro
+Falha por indisponibilidade do barbeiro
+API
+4
+tentar cadastrar um serviço a um cliente que já possui agendamento no mesmo horario
+Falha por cliente ja possuir um agendamento no horário
+API
+
+JIRA-0004: Listagem de Serviços Agendados
+ID
+Condição
+Resultado Esperado
+Camada
+1
+Consultar lista de agendamentos do barbeiro sem aplicar filtros
+Lista de agendamentos exibida
+API
+2
+Filtrar agendamentos por data
+Lista exibida conforme filtro aplicado
+API
+3
+Tentar visualizar agendamentos de outro barbeiro
+Falha por acesso não autorizado
+API
+4
+Exibir informações do agendamento (cliente, cpf, serviço, horário)
+Informações exibidas corretamente
+API
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,212 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Gestão Barbearia API",
+    "version": "1.0.0",
+    "description": "API para gestão de barbearia, incluindo registro, login, agendamento e listagem de serviços."
+  },
+  "paths": {
+    "/api/barbeiros/register": {
+      "post": {
+        "summary": "Registrar barbeiro",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BarbeiroRegister"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Barbeiro registrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Barbeiro" }
+              }
+            }
+          },
+          "400": { "description": "Campos obrigatórios não preenchidos" },
+          "409": { "description": "E-mail ou CPF já cadastrado" }
+        }
+      }
+    },
+    "/api/barbeiros/login": {
+      "post": {
+        "summary": "Login barbeiro",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BarbeiroLogin" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JWTToken" }
+              }
+            }
+          },
+          "401": { "description": "E-mail ou senha inválidos" },
+          "403": { "description": "Conta bloqueada por 15 minutos" }
+        }
+      }
+    },
+    "/api/barbeiros/me": {
+      "get": {
+        "summary": "Perfil do barbeiro logado",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Dados do barbeiro logado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Barbeiro" }
+              }
+            }
+          },
+          "401": { "description": "Token não fornecido ou inválido" },
+          "404": { "description": "Barbeiro não encontrado" }
+        }
+      }
+    },
+    "/api/agendamentos": {
+      "post": {
+        "summary": "Agendar serviço para cliente",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AgendamentoCreate" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Agendamento criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Agendamento" }
+              }
+            }
+          },
+          "400": { "description": "Campos obrigatórios não preenchidos" },
+          "409": { "description": "Horário já ocupado ou cliente já possui serviço neste horário" }
+        }
+      },
+      "get": {
+        "summary": "Listar agendamentos do barbeiro logado",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "query",
+            "description": "Filtrar por data (YYYY-MM-DD)",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de agendamentos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AgendamentoList" }
+                }
+              }
+            }
+          },
+          "401": { "description": "Token não fornecido ou inválido" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BarbeiroRegister": {
+        "type": "object",
+        "properties": {
+          "nome": { "type": "string" },
+          "cpf": { "type": "string" },
+          "email": { "type": "string" },
+          "senha": { "type": "string" },
+          "telefone": { "type": "string" }
+        },
+        "required": ["nome", "cpf", "email", "senha", "telefone"]
+      },
+      "BarbeiroLogin": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "senha": { "type": "string" }
+        },
+        "required": ["email", "senha"]
+      },
+      "Barbeiro": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "nome": { "type": "string" },
+          "cpf": { "type": "string" },
+          "email": { "type": "string" },
+          "telefone": { "type": "string" }
+        }
+      },
+      "JWTToken": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" }
+        }
+      },
+      "AgendamentoCreate": {
+        "type": "object",
+        "properties": {
+          "nomeCliente": { "type": "string" },
+          "cpfCliente": { "type": "string" },
+          "servico": { "type": "string" },
+          "data": { "type": "string", "format": "date" },
+          "horario": { "type": "string" }
+        },
+        "required": ["nomeCliente", "cpfCliente", "servico", "data", "horario"]
+      },
+      "Agendamento": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "barbeiroId": { "type": "string" },
+          "nomeCliente": { "type": "string" },
+          "cpfCliente": { "type": "string" },
+          "servico": { "type": "string" },
+          "data": { "type": "string", "format": "date" },
+          "horario": { "type": "string" }
+        }
+      },
+      "AgendamentoList": {
+        "type": "object",
+        "properties": {
+          "nomeCliente": { "type": "string" },
+          "cpfCliente": { "type": "string" },
+          "servico": { "type": "string" },
+          "horario": { "type": "string" },
+          "data": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
